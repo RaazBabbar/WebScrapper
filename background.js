@@ -1,11 +1,13 @@
-let color = '#3aa757';
+let isAppActive = false; 
 let srcItems = [];
 
 
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ color });
-  console.log('Default background color set to %cgreen', `color: ${color}`);
+   //to do after installation
+
 });
+
+
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if(request.type === "add"){
@@ -21,6 +23,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     });
   }else if(request.type === "remove"){
     srcItems = [];
+    chrome.storage.local.set({ keyItems: srcItems });
   }
 });
 

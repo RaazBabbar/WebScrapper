@@ -4,6 +4,14 @@ clearBtn.addEventListener("click", async () => {
 
 });
 
+toggleBtn.addEventListener("click", async (e) => {
+  let isBtnChecked = e.srcElement.checked;
+  chrome.runtime.sendMessage({ appActivator: isBtnChecked, type: "activation" },
+  function (response) {
+      //notification message for active/inactive successful
+  });
+});
+
 exportBtn.addEventListener("click", async () => {
     let csvContent = "data:text/csv;charset=utf-8,";
     chrome.storage.local.get(['keyItems'], function (result) {
