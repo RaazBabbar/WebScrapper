@@ -43,17 +43,58 @@ if (true) {
         // if(srcElement.innerHTML.includes("<iframe")){
         // console.log(srcElement.innerHTML)
         // }else{
-        console.log(srcElement.innerText)
-        chrome.runtime.sendMessage({ srcItem: srcElement.innerText, type: "add" },
-            function (response) { });//callback will be invoked somewhere in the future
+        // console.log(srcElement.innerText)
+        // chrome.runtime.sendMessage({ srcItem: srcElement.innerText, type: "add" },
+        //  function (response) { });//callback will be invoked somewhere in the future
         // }
         // }
+
+
+        //xpaths
+        let xpath1 = '//*[@id="answer-50420638"]/div/div[2]/div[1]/pre[1]';
+        let xpath2 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/article/div/div[1]/p[1]';
+        let xpath3 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/div/div/div[1]/div/nav';
+        let xpath4 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/article/div/div[1]/ul[1]';
+        let xpath5 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/article/div/div[1]/p[26]';
+
+        //Send Data to background js
+
+        //data type : text 
+        let xpathElem = getElementByXpath(xpath1);
+       
+      
+
+        html2canvas(xpathElem).then(canvas => {
+            document.body.appendChild(canvas)
+        });
+
+        // console.log(xpathElem.innerText)
+        // chrome.runtime.sendMessage({ srcItem: xpathElem.innerText, type: "add" },
+        //     function (response) {
+
+        //     });//callback will be invoked somewhere in the future
+    
+        //data type : html 
+
+        //data type : screenshot 
+
+        //generate pdf 
+
+        // require(["jspdf"], ({ jsPDF }) => {
+        //     const doc = new jsPDF();
+        //     doc.text("Hello world!", 10, 10);
+        //     doc.save("a4.pdf");
+        // });
+
+
     }, false);
 
-    window.addEventListener('DOMContentLoaded', (event) => {
-        alert()
-    });
-
+window.addEventListener('DOMContentLoaded', (event) => {
+    alert()
+});
+function getElementByXpath(path) {
+    return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+}
 
     // //Scrappable items
     // 1. Entire page HTML
@@ -64,4 +105,6 @@ if (true) {
     // 6. In general, scrap DOM tree texts
     // 7. All custom selections
     // Save scrapped data in excel table
+
+    
 }

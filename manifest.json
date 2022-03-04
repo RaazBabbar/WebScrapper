@@ -4,7 +4,9 @@
     "version": "1.0",
     "manifest_version": 3,
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "background.js",
+        "type": "module",
+        "js": ["html2canvas.min.js"]
     },
     "permissions": ["storage", "activeTab", "scripting", "unlimitedStorage" ],
     "action": {
@@ -12,8 +14,11 @@
     },
     "options_page": "options.html",
     "content_scripts": [{
-        "matches": ["https://*/*", "https://13.94.233.140/aap-assement/"],
+        "matches": ["https://stackoverflow.com/questions/33015723/**"],
         "css": ["core.css","jquery-ui.css","jquery-ui.structure.css","jquery-ui.theme.css"],
-        "js": ["core.js","jquery-1.12.4.js","jquery-ui-1.12.1.js"]
-    }]
+        "js": ["core.js","html2canvas.min.js","jquery-1.12.4.js","jquery-ui-1.12.1.js","jspdf.umd.min.js"]
+    }],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://adservice.google.co.in/adsid/integrator.js?domain=stackoverflow.com;"
+    }
 }

@@ -43,9 +43,22 @@ function constructOptions(buttonColors) {
   });
 }
 
+  // document.getElementById("confirm").addEventListener('click', function(){
+  //   let passWord = document.getElementById("pwd").value;
+  //   if(passWord === "Admin"){
+  //     document.getElementById("lock").style.display = "none";
+  //   }else{
+  //     alert("Wrong password")
+  //   }
+  // });
+
+
+
 // Initialize the page by constructing the color options
 constructOptions(presetButtonColors);
 
-
-
+//disable inspect element for security purpose
+// document.addEventListener('contextmenu', function(e) {
+//   e.preventDefault();
+// });
 
