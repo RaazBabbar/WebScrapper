@@ -1,29 +1,20 @@
-v1.0 feedback
-
-Security Issues
-
-1. User should not be able to access every URL
-2. User should not be able to scrap data simply via click.
-3. The options page provides privilege to admin only to configure specific URLS and Paths to capture. 
+New requirements as of 4th Mar 22
+Deadline: 7th Mar 22
 
 
-Enhancement plans
+1. Follow up with the Madhu's mail regarding the options page. Develop
+as per the instructions. 
 
-In Options
-1. With successful login admin is able to configure the extension.
-2. add expath inputs and method of capture, whether screenshot, plain text or html. 
-3. add url inputs
+2. Find a way to generate the pdf file in the extension itself. 
+
+3. Update pop up html file. Only provide a button to export pdf. 
+
+4. Disable inspect element in options page and don't add any login 
+screen as of now. 
 
 # No need to use 3rd party modules to generate pdf. 
 Use simple JS print api .. follow https://stackoverflow.com/a/33890644/3552089
 
 
-In Popup 
-1. Show preview of captures
-2. The Captures should be limited to the current tab only
-3. Export the captures as pdf 
 
-
-In ContentScript 
-1. Hover effect is only applicable to mentioned expaths in options. 
-2. On click of capture button on Popup, that portion will be captured & stored in backgroud.js
+Done... 

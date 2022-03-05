@@ -51,7 +51,7 @@ if (true) {
 
 
         //xpaths
-        let xpath1 = '//*[@id="answer-50420638"]/div/div[2]/div[1]/pre[1]';
+        let xpath1 = '/html/body/app-root/div/app-login-form/form/div/div/div';
         let xpath2 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/article/div/div[1]/p[1]';
         let xpath3 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/div/div/div[1]/div/nav';
         let xpath4 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/article/div/div[1]/ul[1]';
@@ -60,19 +60,30 @@ if (true) {
         //Send Data to background js
 
         //data type : text 
-        let xpathElem = getElementByXpath(xpath1);
-       
-      
+        let captureElement = getElementByXpath(xpath1);
+        console.log("Capturing elem");
+ 
 
-        html2canvas(xpathElem).then(canvas => {
-            document.body.appendChild(canvas)
-        });
+        // html2canvas(captureElement)
+        // .then(canvas => {
+        //     canvas.style.display = 'none'
+        //     document.body.appendChild(canvas)
+        //     return canvas
+        // })
+        // .then(canvas => {
+        //     const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+        //     const a = document.createElement('a')
+        //     a.setAttribute('download', 'my-image.png')
+        //     a.setAttribute('href', image)
+        //     a.click()
+        //     canvas.remove()
+        // })
 
         // console.log(xpathElem.innerText)
-        // chrome.runtime.sendMessage({ srcItem: xpathElem.innerText, type: "add" },
-        //     function (response) {
+        chrome.runtime.sendMessage({ srcItem: captureElement, type: "add" },
+            function (response) {
 
-        //     });//callback will be invoked somewhere in the future
+        });//callback will be invoked somewhere in the future
     
         //data type : html 
 
