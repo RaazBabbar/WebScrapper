@@ -14,6 +14,9 @@ In Options
 2. add expath inputs and method of capture, whether screenshot, plain text or html. 
 3. add url inputs
 
+# No need to use 3rd party modules to generate pdf. 
+Use simple JS print api .. follow https://stackoverflow.com/a/33890644/3552089
+
 
 In Popup 
 1. Show preview of captures
