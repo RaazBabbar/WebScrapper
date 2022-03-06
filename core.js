@@ -51,10 +51,18 @@ if (true) {
 
 
         //xpaths
-        let xpath1 = '/html/body/app-root/div/app-login-form/form/div/div/div';
-        let xpath2 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/article/div/div[1]/p[1]';
+
+        //text
+        let xpath0 = '//*[@id="sections"]';
+        //screenshot
+        let xpath1 = '//*[@id="chips"]'; 
+        //screenshot
+        let xpath2 = '//*[@id="container"]';
+        //html
         let xpath3 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/div/div/div[1]/div/nav';
+        //screenshot
         let xpath4 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/article/div/div[1]/ul[1]';
+        //text
         let xpath5 = '//*[@id="gatsby-focus-wrapper"]/div/div/div/div[1]/div/div/article/div/div[1]/p[26]';
 
         //Send Data to background js
@@ -64,20 +72,38 @@ if (true) {
         console.log("Capturing elem");
  
 
-        // html2canvas(captureElement)
-        // .then(canvas => {
-        //     canvas.style.display = 'none'
-        //     document.body.appendChild(canvas)
-        //     return canvas
-        // })
-        // .then(canvas => {
-        //     const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
-        //     const a = document.createElement('a')
-        //     a.setAttribute('download', 'my-image.png')
-        //     a.setAttribute('href', image)
-        //     a.click()
-        //     canvas.remove()
-        // })
+        html2canvas(captureElement)
+        .then(canvas => {
+            canvas.style.display = 'none'
+            document.body.appendChild(canvas)
+            return canvas
+        })
+        .then(canvas => {
+            const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+            const a = document.createElement('a')
+            // a.setAttribute('download', 'my-image.png')
+             a.setAttribute('href', image)
+            // a.click();
+            var img = document.createElement('img');
+            img.src = image;
+
+          //  document.getElementById('container').appendChild(img);
+
+            console.log("pdf print to be exported");
+            //download pdf
+            var divContents = '$("#dvContainer").html()';
+            var printWindow = window.open('', '', 'height=400,width=800');
+            printWindow.document.write('<html><head><title>DIV Contents</title>');
+            printWindow.document.write('</head><body >');
+            printWindow.document.write('<img src="'+image+'">');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+
+
+
+            canvas.remove()
+        })
 
         // console.log(xpathElem.innerText)
         chrome.runtime.sendMessage({ srcItem: captureElement, type: "add" },
@@ -107,15 +133,7 @@ function getElementByXpath(path) {
     return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
 
-    // //Scrappable items
-    // 1. Entire page HTML
-    // 2. Identify attached File
-    // 3. Scrapped attached File
-    // 4. Table
-    // 5. Nav items
-    // 6. In general, scrap DOM tree texts
-    // 7. All custom selections
-    // Save scrapped data in excel table
+
 
     
 }

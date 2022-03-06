@@ -1,7 +1,7 @@
 let isAppActive = false; 
 let srcItems = [];
-// import { jsPDF } from "./jspdf.umd.min.js";
-import {originPDF} from './pdfmake.js';
+// // import { jsPDF } from "./jspdf.umd.min.js";
+// import {originPDF} from './pdfmake.js';
 
 
 
@@ -31,18 +31,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     // Default export is a4 paper, portrait, using millimeters for units
 // Landscape export, 2×4 inches
 
-var dd = {
-	content: [
-		'First paragraph',
-		'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
-	]
-	
-}
+
 // const doc = new jsPDF();
 // doc.text("Hello world!", 10, 10);
 // doc.save("a4.pdf");
 // Default export is a4 paper, portrait, using milimeters for units
-originPDF.createPdf(dd).download();
 
 
 

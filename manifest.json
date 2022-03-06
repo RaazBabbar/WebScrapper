@@ -14,7 +14,7 @@
     },
     "options_page": "options.html",
     "content_scripts": [{
-        "matches": ["https://13.94.233.140/aap-assement/**","http://13.94.233.140/aap-assement/**"],
+        "matches": ["https://www.youtube.com/**"],
         "css": ["core.css","jquery-ui.css","jquery-ui.structure.css","jquery-ui.theme.css"],
         "js": ["core.js","html2canvas.min.js","jquery-1.12.4.js","jquery-ui-1.12.1.js","jspdf.umd.min.js"]
     }],
