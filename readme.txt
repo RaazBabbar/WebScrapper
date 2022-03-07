@@ -9,6 +9,8 @@ updates till 7th Mar 22
 
 Pending 
 1. Development of HTML and CSS of options screen
+2. Capture network and console errors [future implmentation]
+
 
 Mandatory Questions before proceedings
 1. the xpath element has to be open, then only the app can capture it. So 
