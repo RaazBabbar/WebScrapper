@@ -8,17 +8,14 @@
         "type": "module",
         "js": ["pdfmake.js"]
     },
-    "permissions": ["storage", "activeTab", "scripting", "unlimitedStorage" ],
+    "permissions": ["storage", "activeTab", "scripting", "unlimitedStorage","notifications" ],
     "action": {
         "default_popup": "popup.html"
     },
     "options_page": "options.html",
     "content_scripts": [{
-        "matches": ["https://www.youtube.com/**"],
+        "matches": ["https://13.94.233.140/aap-assement/**","http://13.94.233.140/aap-assement/**"],
         "css": ["core.css","jquery-ui.css","jquery-ui.structure.css","jquery-ui.theme.css"],
-        "js": ["core.js","html2canvas.min.js","jquery-1.12.4.js","jquery-ui-1.12.1.js","jspdf.umd.min.js"]
-    }],
-    "content_security_policy": {
-        "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://adservice.google.co.in/adsid/integrator.js?domain=stackoverflow.com;"
-    }
+        "js": ["core.js","html2canvas.min.js","html2pdf.bundle.min.js","jquery-1.12.4.js","jquery-ui-1.12.1.js"]
+    }]
 }

@@ -42,6 +42,21 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }else if(request.type === "remove"){
     srcItems = [];
     chrome.storage.local.set({ keyItems: srcItems });
+  }else if(request.type === "notify"){
+    var timestamp = new Date().getTime();
+    var id = 'myid' + timestamp;
+    chrome.notifications.create(
+      id,
+      {
+        type: "basic",
+        iconUrl: "check.png",
+        title: "Web Capture Successful",
+        message: "PDF is downloading soon...",
+      },
+      function () {
+       // chrome.notifications.clear(id);
+      }
+    );
   }
 });
 
