@@ -2,19 +2,21 @@
     "name": "Web Capture",
     "description": "Web Scrapping Tool",
     "version": "1.0",
+    "minimum_chrome_version": "10.0",
     "manifest_version": 3,
+    "devtools_page": "devtools.html",
     "background": {
         "service_worker": "background.js",
         "type": "module",
         "js": ["pdfmake.js"]
     },
-    "permissions": ["storage", "activeTab", "scripting", "unlimitedStorage","notifications" ],
+    "permissions": ["storage", "activeTab", "scripting", "unlimitedStorage","notifications","tabs"],
     "action": {
         "default_popup": "popup.html"
     },
     "options_page": "options.html",
     "content_scripts": [{
-        "matches": ["https://13.94.233.140/aap-assement/**","http://13.94.233.140/aap-assement/**"],
+        "matches": ["*://*/*"],
         "css": ["core.css","jquery-ui.css","jquery-ui.structure.css","jquery-ui.theme.css"],
         "js": ["core.js","html2canvas.min.js","html2pdf.bundle.min.js","jquery-1.12.4.js","jquery-ui-1.12.1.js"]
     }]

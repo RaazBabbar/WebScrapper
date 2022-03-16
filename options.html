@@ -1,120 +1,403 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 
 <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <link rel="stylesheet" href="button.css">
 
   <link rel="stylesheet" href="jquery-ui.css">
   <link rel="stylesheet" href="jquery-ui.structure.css">
   <link rel="stylesheet" href="jquery-ui.theme.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link href="bootstrap.min.css" rel="stylesheet">
 
-  <script src="jquery-1.12.4.js"></script>
-  <script src="jquery-ui-1.12.1.js"></script>
-
-
+  <style>
+    body {
+      background-color: #ececec;
+    }
+  </style>
 
 </head>
 
 <body>
+  <header>
+ Configuration
+  </header>
+  <div class="options-wrapper-navbar">
 
-  <div class="options-wrapper">
-    <h1><img class="icon" src="./images/settings.png"> Settings</h1>
-
-    <!-- 
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          
-          <div class="data-format">
-            DATA FORMAT
-             <br />
-             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-         
-               <input type="radio" class="btn-check" name="btnradio_a" id="btnradio1" autocomplete="off" checked>
-               <label class="btn btn-outline-primary" for="btnradio1">Text</label>
-         
-               <input type="radio" class="btn-check" name="btnradio_a" id="btnradio2" autocomplete="off">
-               <label class="btn btn-outline-primary" for="btnradio2">HTML</label>
-         
-             </div>
-           </div>
-        </div>
-        <div class="col">
-          <div class="data-format">
-            POWER
-             <br />
-             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-         
-               <input type="radio" class="btn-check" name="btnradio_b" id="btnradio3" autocomplete="off" checked>
-               <label class="btn btn-outline-primary" for="btnradio3">ON</label>
-         
-               <input type="radio" class="btn-check" name="btnradio_b" id="btnradio4" autocomplete="off">
-               <label class="btn btn-outline-primary" for="btnradio4">OFF</label>
-         
-             </div>
-           </div>
-        </div>
+    <div>
+      <div class="mainpage">
+        Main Page
       </div>
 
+    </div>
+    <div>
+      <div>
 
-    </div> -->
+
+        <button id="editpage" class="wc-btn hide disable">Save Changes </button>
+        <button id="addpage" class="wc-btn disable">Add Page </button>
+        <button id="deletepage" class="wc-btn" data-toggle="modal" data-target="#exampleModalCenter">Delete Page
+        </button>
 
 
 
-    <div class="container">
-      <div class="row">
-        <div class="col"> <input type="email" class="form-control" id="exampleFormControlInput1"
-            placeholder="Type here..">
-        </div>
-        <div class="col">
-          <div class="mb-3">
-            <button onclick="addURL()" type="button" class="btn btn-secondary">Add URL</button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- <div class="modal-body">
+                ...
+              </div> -->
+              <div class="modal-footer">
+
+                <button id="deleteBtn" class="wc-btn">Yes</button>
+
+                <button id="cancelBtn" class="wc-btn" data-dismiss="modal">No </button>
+
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <br />
-      <div class="row">
-        <ol class="list-group list-group-numbered">
-          <li class="list-group-item">http://talent.capgemini.com <div
-              class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary" type="button">Remove</button>
-              <button class="btn btn-primary me-md-2" type="button">Edit</button>
-            </div>
-          </li>
 
-        </ol>
 
       </div>
-
     </div>
 
-    <!-- <div class="mode-wrapper">
-      <input type="radio" name="toogle_me" value="text"> Text </input>
-      <input type="radio" name="toogle_me" value="html"> HTML </input>
-    </div> -->
+
+
   </div>
-<!-- 
-  <div class="page-lock-wrapper" id="lock">
-    <div>
-     
-      <form class="row g-3 admin-login-form">
-        <p>Login to configuration</p>
-        <div class="col-auto">
-          <label for="inputPassword2" class="visually-hidden">Password</label>
-          <input type="password" class="form-control" id="pwd" placeholder="Password">
+  <div class="options-wrapper-content">
+
+    <div class='carousel_item_wrapper'>
+
+      <div class="wc-table">
+        <div class="wc-row">
+          <div class="wc-col wc-title">
+            Name
+          </div>
+          <div class="wc-col wc-name-input">
+            <input type="text" class="form-control" id="nameControl" placeholder="Type here...">
+          </div>
         </div>
-        <div class="col-auto">
-          <button type="submit" id="confirm" class="btn btn-primary mb-3">Confirm identity</button>
+        <div id="urlForm" class="wc-row disable">
+          <div class="wc-col wc-title">
+            URL
+          </div>
+          <div class="wc-col wc-url-input">
+            <input type="text" class="form-control" id="urlControl" placeholder="Type here...">
+          </div>
         </div>
-      </form>
+        <div class="wc-row ">
+          <div class="wc-col wc-title disable " id="xp-title">
+            XPath
+          </div>
+          <div class="wc-col wc-xpath-input disable" id="xp-path">
+            <input type="text" class="form-control" id="xpathControl" placeholder="Type here...">
+          </div>
+          <div class="wc-col wc-xpath-dropdown disable" id="xp-type">
+
+            <select name="screenshot" id="dropdown">
+              <option value="screenshot">Screenshot</option>
+              <option value="text">Text</option>
+              <option value="html">HTML</option>
+            </select>
+          </div>
+          <div class="wc-col wc-xpath-btn">
+            <button class="wc-btn disable" id="addxpbtn">Add XPath </button>
+          </div>
+        </div>
+        <div class="wc-row">
+          <div class="wc-col wc-title">
+
+          </div>
+          <div class="wc-col wc-url-input disable">
+
+            <table class="table xpath-table hide">
+              <thead>
+                <tr>
+                  <th class="wc-xpath" scope="col">XPath</th>
+                  <th class="xpath-type" scope="col">Type</th>
+                  <th class="action" scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="xpaths-viewer">
+
+
+               
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+        <!-- <div class="wc-row">
+          <div class="wc-col wc-title">
+
+          </div>
+          <div class="wc-col wc-xpath-input">
+            <div class="wc-table">
+              <div class="wc-row">
+                <div class="wc-col wc-title">
+                  XPath
+                </div>
+                <div class="wc-col wc-title">
+                  Type
+                </div>
+                <div class="wc-col wc-title">
+                  Action
+                </div>
+        
+              </div>
+
+            </div>
+          </div>
+
+        </div> -->
+      </div>
+
+
+      <!-- <table> -->
+      <!-- <tr>
+          <td class="opt-1">Name</td>
+          <td> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Type here...">
+          </td>
+        </tr>
+        <tr>
+          <td class="opt-1">URL</td>
+          <td colspan="4"> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Tyep here...">
+          </td>
+          <td></td>
+          <td ></td>
+          <td >
+
+          </td>
+        </tr> -->
+      <!-- <tr>
+          <td colspan="1" class="opt-1">XPath</td>
+          <td colspan="5"> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Type here...">
+          </td>
+          <td colspan="1">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </td>
+          <td colspan="1">
+            <button class="wc-btn">Add XPath </button>
+
+          </td>
+          <td colspan="1">
+
+          </td>
+        </tr> -->
+
+
+      <!-- </table> -->
+
     </div>
-  </div> -->
+
+
+  </div>
+  <!-- <div class="options-list-content">
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small>3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+     
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">List group item heading</h6>
+          <small class="text-muted">3 days ago</small>
+        </div>
+
+      </a>
+
+    </div>
+</div> -->
+  <div class="options-wrapper-pagination">
+    <div>
+      <div>
+        ...
+      </div>
+
+    </div>
+    <div>
+      <div>
+
+        <button class="wc-pg-btn" id="pag-prev">
+          < </button>
+            <button class="wc-pg-btn" id="pag-next">></button>
+      </div>
+    </div>
+
+
+  </div>
+
+  </div>
+  <div class="notify">
+    XPath has been added successfully.
+  </div>
+  <footer>
+    <div>
+      Capgemini &nbsp; &nbsp; &nbsp; Web capture
+    </div>
+    <div>
+      Support &nbsp; &nbsp; &nbsp; Contact
+
+    </div>
+  </footer>
+
 
 </body>
+
+
+<script src="jquery-1.12.4.js"></script>
+<script src="jquery-ui-1.12.1.js"></script>
 <script src="options.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="bootstrap.min.js"></script>
+<!-- <script src="jquery-3.2.1.slim.min.js"></script> -->
+<script src="popper.min.js"></script>
 
 </html>

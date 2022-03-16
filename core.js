@@ -12,7 +12,7 @@ if (true) {
 
     // Mouse listener for any move event on the current document.
     document.addEventListener('mousemove', function (e) {
-
+        
         var srcElement = e.srcElement;
 
         // Lets check if our underlying element is a DIV.
@@ -32,6 +32,9 @@ if (true) {
         prevDOM = srcElement;
         //  }
     }, false);
+
+
+
 
 
     document.addEventListener('click', function (e) {
@@ -131,13 +134,24 @@ if (true) {
     });
     chrome.runtime.onMessage.addListener(pdf => {
         if(pdf.shouldExport){
-            // get caputures 
-            getCaptures().then((res)=>{
-                // generate pdf
-                generatePDF(res);
-            },(err)=>{
-                //notify msg
+
+            chrome.storage.local.get(['options'], function (result) {
+                result.options.map((storage, index)=>{
+                     if(storage.url === window.location.href){
+                            let xpaths = storage.xpaths;
+                            // get caputures 
+                            getCaptures(xpaths).then((res)=>{
+                                // generate pdf
+                                generatePDF(res);
+                            },(err)=>{
+                                //notify msg
+                            });
+                     }
+                });
+                 
             });
+
+
 
         
         }
@@ -146,87 +160,96 @@ if (true) {
     function generatePDF(res){
       //  alert("pdf time..."+ res);
      // alert("2");
+
+     //get console
+    //  console.log(fetchConsole());
     }
-    async function getCaptures(){
+    async function getCaptures(xpaths){
         let myPromise = new Promise(function(resolve) {
            
                 //alert("1");
                 let responseData; 
                 //get options data from storage
 
-                //create canvas 
-                let xpath1 = '/html/body/div[3]/div[2]/div/mat-dialog-container/app-account-add/form';
-                let captureElement = getElementByXpath(xpath1);
-                if(captureElement){
-                    html2canvas(captureElement)
-                    .then(canvas => {
-                        canvas.style.display = 'none'
-                        document.body.appendChild(canvas)
-                        return canvas
-                    })
-                    .then(canvas => {
-                        const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
-                        const a = document.createElement('a')
-                        // a.setAttribute('download', 'my-image.png')
-                        a.setAttribute('href', image)
-                        // a.click();
-                        var img = document.createElement('img');
-                        img.src = image;
-                        img.style.width = "100%"; 
-        
-                        //  document.getElementById('container').appendChild(img);
-        
-                        console.log("pdf print to be exported");
-                        //download pdf
-                    
-                        // let printWindow = window.open('', '', 'height=400,width=800');
-                        // printWindow.document.write('<html><head><title>Preview</title>');
-                        // printWindow.document.write('</head><body >');
-                        // //printWindow.document.write('<div>');
-                        // printWindow.document.write('<img style="width:100%;" src="' + image + '">');
-                        // //printWindow.document.write('</div >');
-                        // printWindow.document.write('</body></html>');
-                        // printWindow.document.close();
-    
-    
-                        //create html 
-                         // create a new div element
-                        const newDiv = document.createElement("div");
-                          // and give it some content
-                        const newContent = document.createTextNode("Web Capture");
-    
-                          // add the text node to the newly created div
-                        newDiv.appendChild(newContent);
-                        newDiv.appendChild(img);
-                        var opt = {
-                            margin:       1,
-                            filename:     'myfile.pdf',
-                            image:        { type: 'jpeg', quality: 0.98 },
-                            html2canvas:  { scale: 2 },
-                            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-                          };
-    
-                          //send background script alert 
-                        chrome.runtime.sendMessage({ type: "notify" },
-                        function (response) {
-                            //notification message for active/inactive successful
-                            setTimeout(function() {
-                                //printWindow.print();
-                                //printWindow.close();
-                         
-                                html2pdf().set(opt).from(newDiv).save();
-                            }, 2000);
-                        });
-    
-                     
-                        canvas.remove();
-                                //send responseData to the callback ()
-                        resolve(responseData);
-                    });
+                xpaths.map((xpath)=>{
+                    //create canvas
+                    let captureElement = getElementByXpath(xpath);
+                    if(captureElement){
+
+                        
+
+                        html2canvas(captureElement)
+                        .then(canvas => {
+                            canvas.style.display = 'none'
+                            document.body.appendChild(canvas)
+                            return canvas
+                        })
+                        .then(canvas => {
+                            const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+                            const a = document.createElement('a')
+                            // a.setAttribute('download', 'my-image.png')
+                            a.setAttribute('href', image)
+                            // a.click();
+                            var img = document.createElement('img');
+                            img.src = image;
+                            img.style.width = "100%"; 
             
-                }else{
-                    //notify the xpath is not detected in the page. 
-                }
+                            //  document.getElementById('container').appendChild(img);
+            
+                            console.log("pdf print to be exported");
+                            //download pdf
+                        
+                            // let printWindow = window.open('', '', 'height=400,width=800');
+                            // printWindow.document.write('<html><head><title>Preview</title>');
+                            // printWindow.document.write('</head><body >');
+                            // //printWindow.document.write('<div>');
+                            // printWindow.document.write('<img style="width:100%;" src="' + image + '">');
+                            // //printWindow.document.write('</div >');
+                            // printWindow.document.write('</body></html>');
+                            // printWindow.document.close();
+        
+        
+                            //create html 
+                             // create a new div element
+                            const newDiv = document.createElement("div");
+                              // and give it some content
+                            const newContent = document.createTextNode("Web Capture");
+        
+                              // add the text node to the newly created div
+                            newDiv.appendChild(newContent);
+                            newDiv.appendChild(img);
+                            var opt = {
+                                margin:       1,
+                                filename:     'myfile.pdf',
+                                image:        { type: 'jpeg', quality: 0.98 },
+                                html2canvas:  { scale: 2 },
+                                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                              };
+        
+                              //send background script alert 
+                            chrome.runtime.sendMessage({ type: "notify" },
+                            function (response) {
+                                //notification message for active/inactive successful
+                                setTimeout(function() {
+                                    //printWindow.print();
+                                    //printWindow.close();
+                             
+                                    html2pdf().set(opt).from(newDiv).save();
+                                }, 1000); 
+                            });
+        
+                         
+                            canvas.remove();
+                                    //send responseData to the callback ()
+                            resolve(responseData);
+                        });
+                
+                    }else{
+                        //notify the xpath is not detected in the page. 
+                    }
+                });
+               
+          
      
         
         });
@@ -237,9 +260,37 @@ if (true) {
         return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     }
 
+    function fetchConsole(){
+        var consoleText = ""
+        // define a new console
+        window.console = (function(console){
+            return {
+                log: function(text){
+                    console.log(text);
+                    consoleText += text;
+                },
+                info: function (text) {
+                    console.info(text);
+                    consoleText += text;
+                },
+                warn: function (text) {
+                    console.warn(text);
+                    consoleText += text;
+                },
+                error: function (text) {
+                    console.error(text);
+                    consoleText += text;
+                }
+            };
+        }(window.console));
+     
+        window.addEventListener('error', function(event) {
+            consoleText += event.message;
+        })
 
- 
-
+        return consoleText; 
+    }
+   
 
 
 
